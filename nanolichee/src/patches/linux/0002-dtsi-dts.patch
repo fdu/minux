@@ -1,0 +1,64 @@
+diff --git a/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts b/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+index 3673d8a..7c14cab 100644
+--- a/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
++++ b/arch/arm/boot/dts/suniv-f1c100s-licheepi-nano.dts
+@@ -23,7 +23,8 @@
+ 	};
+ 
+ 	panel: panel {
+-		compatible = "qiaodian,qd43003c0-40", "simple-panel";
++		compatible = "lg,lb070wv8", "simple-panel";
++		#compatible = "qiaodian,qd43003c0-40", "simple-panel";
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+ 		enable-gpios = <&pio 4 6 GPIO_ACTIVE_HIGH>;
+@@ -77,9 +78,46 @@
+ };
+ 
+ &spi0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&spi0_pins_a>;
+-	status = "okay";
++        pinctrl-names = "default";
++        pinctrl-0 = <&spi0_pins_a>;
++        status = "okay";
++
++        flash: xt25f128b@0 {
++                #address-cells = <1>;
++                #size-cells = <1>;
++                compatible = "winbond,xt25f128b", "jedec,spi-nor";
++                reg = <0>;
++                spi-max-frequency = <50000000>;
++                partitions {
++                        compatible = "fixed-partitions";
++                        #address-cells = <1>;
++                        #size-cells = <1>;
++
++                        partition@0 {
++                                label = "u-boot";
++                                reg = <0x000000 0x80000>;
++                                read-only;
++                        };
++
++                        partition@80000 {
++                                label = "dtb";
++                                reg = <0x80000 0x10000>;
++                                read-only;
++                        };
++
++                        partition@90000 {
++                                label = "kernel";
++                                reg = <0x90000 0x400000>;
++                                read-only;
++                        };
++
++                        partition@490000 {
++                                label = "rootfs";
++                                reg = <0x490000 0xb70000>;
++                        };
++
++                };
++        };
+ };
+ 
+ &i2c0 {

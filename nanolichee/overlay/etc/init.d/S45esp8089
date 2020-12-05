@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+	printf "Starting ESP8089: "
+	/sbin/modprobe esp8089
+	sleep 1 && ifup wlan0 >/dev/null 2>&1 &
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  stop)
+	printf "Stopping ESP8089: "
+	/sbin/rmmod esp8089
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  restart|reload)
+	"$0" stop
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
