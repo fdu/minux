@@ -58,7 +58,7 @@ $(patch_esp8089): $(dir_downloads)/$(archive_kernel_vanilla) $(dir_downloads)/$(
 	mv $(dir_work)/kernel_patching/drivers/staging/Kconfig.new $(dir_work)/kernel_patching/drivers/staging/Kconfig
 	echo 'source "drivers/staging/esp8089/Kconfig"' >> $(dir_work)/kernel_patching/drivers/staging/Kconfig
 	echo 'endif # STAGING' >> $(dir_work)/kernel_patching/drivers/staging/Kconfig
-	cd $(dir_work)/kernel_patching && git diff ../kernel_vanilla/drivers/staging/ drivers/staging/ > ../../$@ || true
+	cd $(dir_work)/kernel_patching && git diff --no-index ../kernel_vanilla/drivers/staging/ drivers/staging/ > ../../$@ || true
 	rm -rf $(dir_work)/kernel_vanilla
 	rm -rf $(dir_work)/kernel_patching
 
@@ -70,7 +70,7 @@ $(patch_f1c100_drivers): $(dir_downloads)/$(archive_kernel_vanilla) $(dir_downlo
 	tar xf $(dir_downloads)/$(archive_kernel_vanilla) --strip-components=1 -C $(dir_work)/kernel_patching
 	tar zxf $(dir_downloads)/$(archive_kernel_3rdparty) --strip-components=3 -C $(dir_work)/kernel_patching/ suda-morris-suda-f1c100s-95c281e/kernel/linux-4.19.1
 	cp $(dir_work)/kernel_vanilla/drivers/video/logo/logo_linux_clut224.ppm $(dir_work)/kernel_patching/drivers/video/logo/
-	cd $(dir_work)/kernel_patching && git diff ../kernel_vanilla/ . > ../../$@ || true
+	cd $(dir_work)/kernel_patching && git diff --no-index ../kernel_vanilla/ . > ../../$@ || true
 	rm -rf $(dir_work)/kernel_vanilla
 	rm -rf $(dir_work)/kernel_patching
 
