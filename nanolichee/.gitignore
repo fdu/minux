@@ -1,4 +1,5 @@
 work
 overlay/root/.ssh
 overlay/etc/wpa_supplicant.conf
+overlay/etc/dropbear/dropbear_ecdsa_host_key
 overlay/lib
