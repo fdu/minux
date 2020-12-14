@@ -4,7 +4,7 @@
 #
 
 #
-# Compiler: arm-buildroot-linux-uclibcgnueabi-gcc.br_real (Buildroot 2020.02.8) 8.4.0
+# Compiler: arm-buildroot-linux-uclibcgnueabi-gcc.br_real (Buildroot -gaf8fa1c-dirty) 8.4.0
 #
 CONFIG_CC_IS_GCC=y
 CONFIG_GCC_VERSION=80400
@@ -2653,7 +2653,7 @@ CONFIG_EXTCON=y
 CONFIG_PWM=y
 CONFIG_PWM_SYSFS=y
 # CONFIG_PWM_FSL_FTM is not set
-# CONFIG_PWM_PCA9685 is not set
+CONFIG_PWM_PCA9685=y
 CONFIG_PWM_SUN4I=y
 
 #
