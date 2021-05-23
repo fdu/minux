@@ -12,3 +12,4 @@ allow-hotplug wlan0
 iface wlan0 inet dhcp
   udhcpc_opts -t 60
   pre-up sleep 0.5 && wpa_supplicant -c /etc/wpa_supplicant.conf -i wlan0 -B > /dev/null
+  post-up ifconfig wlan0 mtu 500
