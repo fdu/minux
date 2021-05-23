@@ -15,7 +15,7 @@ else
   echo $NOK
 fi
 
-echo -ne "  Memory (32768 Kbytes)\t\t"
+echo -ne "  Memory (32768 kB)\t\t"
 if grep -q "/32768K available" $LOG; then
   echo $OK
 else
@@ -30,7 +30,7 @@ else
   echo $NOK
 fi
 
-echo -ne "  SPI (xt25f128b 16384 Kbytes)\t"
+echo -ne "  Flash (xt25f128b 16384 kB)\t"
 if grep -q "m25p80 spi0.0: xt25f128b (16384 Kbytes)" $LOG; then
   echo $OK
 else
@@ -59,17 +59,14 @@ else
   echo $NOK
 fi
 
-echo -ne "  PCA9685 PWM on I2C\t\t"
-#echo 0 > /sys/class/pwm/pwmchip0/export
-#echo 0 > /sys/class/pwm/pwmchip0/unexport
-#if [ ! dmesg | grep -v -q "i2c i2c-0: mv64xxx: I2C bus locked" ] &&
-#   grep -q pca9685-pwm /sys/class/pwm/pwmchip0/device/name; then
-if grep -q pca9685-pwm /sys/class/pwm/pwmchip0/device/name &&
-   ! dmesg | grep -q "i2c i2c-0: mv64xxx: I2C bus locked" ; then
-  echo $OK
-else
-  echo $NOK
-fi
+#echo -ne "  PCA9685 PWM on I2C\t\t"
+#if [ -f /sys/class/pwm/pwmchip0/device/name ] &&
+#   grep -q pca9685-pwm /sys/class/pwm/pwmchip0/device/name &&
+#   ! dmesg | grep -q "i2c i2c-0: mv64xxx: I2C bus locked" ; then
+#  echo $OK
+#else
+#  echo $NOK
+#fi
 
 echo -ne "  USB phy and hub\t\t"
 if grep -q "usb_phy_generic usb_phy_generic.0.auto" $LOG &&
@@ -104,7 +101,7 @@ else
 fi
 
 echo "Configuration"
-echo -ne "  SPI partitions\t\t"
+echo -ne "  Flash partitions\t\t"
 if grep -q "\"u-boot\"" $LOG &&
    grep -q "\"dtb\"" $LOG &&
    grep -q "\"kernel\"" $LOG &&
