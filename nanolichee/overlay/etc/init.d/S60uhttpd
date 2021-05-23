@@ -1,0 +1,27 @@
+#!/bin/sh
+
+WWW_DIR=/www
+
+case "$1" in
+  start)
+	printf "Starting uhttpd: "
+	mkdir -p $WWW_DIR
+	uhttpd -p 80 -h $WWW_DIR
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  stop)
+	printf "Stopping uhttpd: "
+	pkill uhttpd
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  restart|reload)
+	"$0" stop
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
