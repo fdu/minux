@@ -8,7 +8,7 @@ dir_configs = $(dir_src)/configs
 dir_patches = $(dir_src)/patches
 archive_buildroot = buildroot.tar.gz
 url_buildroot = https://buildroot.org/downloads/buildroot-2018.02.9.tar.bz2
-url_uboot = https://github.com/MiyooCFW/mainboot/raw/master/boot/misc/u-boot-bins/u-boot-v90_q90_pocketgo.bin
+url_uboot = https://github.com/flabbergast/tmp-miyooboot/raw/master/boot/misc/u-boot-bins/u-boot-v90_q90_pocketgo.bin
 
 all: $(dir_output)/u-boot.bin $(dir_output)/suniv-f1c500s-miyoo.dtb $(dir_output)/zImage $(dir_output)/boot.scr $(dir_output)/rootfs.tar
 	
