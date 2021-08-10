@@ -1,0 +1,4 @@
+output
+work
+overlay/root/.ssh
+overlay/etc/wpa_supplicant.conf

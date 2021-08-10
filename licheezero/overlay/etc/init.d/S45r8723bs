@@ -1,0 +1,25 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+	printf "Starting r8723bs: "
+	/sbin/modprobe r8723bs
+	sleep 1 && ifup wlan0 >/dev/null 2>&1 &
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  stop)
+	printf "Stopping r8723bs: "
+	/sbin/rmmod r8723bs
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  restart|reload)
+	"$0" stop
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
